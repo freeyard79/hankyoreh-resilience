@@ -397,8 +397,9 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
   display:flex;flex-direction:column;align-items:stretch;
   transition:flex .72s cubic-bezier(.4,0,.2,1),opacity .45s .22s;
 }
-.km-split.panel-open .km-map-pane{flex:0 0 56%;}
-.km-split.panel-open .km-data-pane{flex:0 0 44%;opacity:1;}
+.km-split.panel-open .km-map-pane{flex:0 0 33%;}
+.km-split.panel-open .km-article-pane{flex:0 0 33%;opacity:1;}
+.km-split.panel-open .km-data-pane{flex:0 0 34%;opacity:1;}
 @media(max-width:767px){
   /* Korea map section: auto height to allow data panel to expand below */
   .korea-map-section{height:auto;min-height:100svh;overflow:visible;}
@@ -467,16 +468,16 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 .km-reset-btn{position:absolute;top:12px;left:12px;background:rgba(15,40,90,0.78);border:1px solid rgba(80,140,220,0.4);border-radius:8px;padding:7px 14px;font-size:11px;font-weight:700;color:rgba(180,215,255,0.85);cursor:pointer;backdrop-filter:blur(8px);transition:background .15s;}
 .km-reset-btn:hover{background:rgba(25,60,130,0.9);}
 /* Data panel */
-.km-panel-scroll{width:100%;padding:20px 20px 16px;overflow-y:auto;flex:1;min-height:0;}
+.km-panel-scroll{width:100%;padding:16px 20px 12px;overflow-y:auto;flex:1;min-height:0;}
 .km-panel-close{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:rgba(160,200,255,0.6);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;float:right;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .km-panel-close:hover{background:rgba(255,255,255,0.14);color:#fff;}
 .km-panel-sido-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#5aa8e0;text-transform:uppercase;margin-bottom:5px;padding-top:4px;clear:both;}
-.km-panel-name{font-size:clamp(24px,3.5vw,32px);font-weight:900;color:#eef3ff;letter-spacing:-1.5px;line-height:1;margin-bottom:3px;}
-.km-panel-rank{font-size:11px;color:rgba(140,185,255,0.4);margin-bottom:14px;}
-.km-score-block{display:flex;align-items:baseline;gap:5px;margin-bottom:22px;}
-.km-score-big{font-size:clamp(44px,6vw,56px);font-weight:900;color:#fff;letter-spacing:-3px;line-height:1;}
+.km-panel-name{font-size:clamp(22px,3vw,28px);font-weight:900;color:#eef3ff;letter-spacing:-1.5px;line-height:1;margin-bottom:2px;}
+.km-panel-rank{font-size:11px;color:rgba(140,185,255,0.4);margin-bottom:8px;}
+.km-score-block{display:flex;align-items:baseline;gap:5px;margin-bottom:12px;}
+.km-score-big{font-size:clamp(36px,5vw,48px);font-weight:900;color:#fff;letter-spacing:-3px;line-height:1;}
 .km-score-max{font-size:12px;color:rgba(140,185,255,0.35);font-weight:400;align-self:flex-end;padding-bottom:4px;}
-.km-panel-crystal{display:block;width:220px;height:220px;max-width:100%;margin:0 auto 20px;}
+.km-panel-crystal{display:block;width:210px;height:210px;max-width:100%;margin:12px auto 14px;}
 .km-pdims{display:flex;flex-direction:column;gap:11px;}
 .km-pdim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .km-pdim-lbl{font-size:11px;color:rgba(160,200,255,0.6);}
@@ -664,11 +665,11 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 @keyframes hsFadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
 
 /* ── 패널 내 관련 기사 ── */
-.km-related{margin-top:16px;margin-bottom:20px;border:1px solid rgba(80,140,220,0.22);border-radius:12px;padding:16px;background:rgba(10,25,55,0.4);}
+.km-related{margin-top:10px;margin-bottom:12px;border:1px solid rgba(80,140,220,0.22);border-radius:10px;padding:12px;background:rgba(10,25,55,0.4);}
 .km-related-label{font-size:9px;font-weight:700;letter-spacing:2.5px;color:rgba(140,185,255,0.55);text-transform:uppercase;margin-bottom:12px;}
 .km-rel-card{background:rgba(255,255,255,0.05);border:1px solid rgba(80,140,220,0.15);border-radius:10px;overflow:hidden;cursor:pointer;transition:all .2s;margin-bottom:10px;display:flex;align-items:stretch;}
 .km-rel-card:hover{background:rgba(255,255,255,0.10);border-color:rgba(80,140,220,0.35);transform:translateY(-1px);}
-.km-rel-img{flex:0 0 130px;width:130px;min-height:90px;background-size:cover;background-position:center;background-color:#0d1e38;}
+.km-rel-img{flex:0 0 110px;width:110px;min-height:75px;background-size:cover;background-position:center;background-color:#0d1e38;}
 .km-rel-body{padding:12px 14px;flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;}
 .km-rel-badge{font-size:8px;font-weight:700;letter-spacing:1.5px;color:rgba(180,150,255,0.8);text-transform:uppercase;margin-bottom:5px;}
 .km-rel-title{font-size:12px;font-weight:700;color:rgba(220,235,255,0.9);line-height:1.5;letter-spacing:-0.2px;}
@@ -754,6 +755,41 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
   .hs-title{font-size:19px;}
   .hs-btn-s{display:none;} /* 아주 작은 화면에서 두번째 버튼 숨김 */
   .case-feat-img{min-height:170px;}
+}
+
+/* ── 기사 패널 (3분할 중간) ── */
+.km-article-pane{
+  flex:0 0 0px;
+  overflow:hidden;opacity:0;
+  background:linear-gradient(160deg,#0a1830 0%,#071020 100%);
+  border-left:1px solid rgba(80,140,220,0.18);
+  display:flex;flex-direction:column;align-items:stretch;
+  transition:flex .72s cubic-bezier(.4,0,.2,1),opacity .45s .22s;
+}
+.km-art-scroll{width:100%;padding:20px 20px 16px;overflow-y:auto;flex:1;min-height:0;}
+.km-art-hdr{display:flex;align-items:center;gap:8px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(80,140,220,0.18);}
+.km-art-hdr-icon{font-size:16px;}
+.km-art-hdr-txt{font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(140,185,255,0.65);text-transform:uppercase;}
+/* 기사 카드 — 세로형 (패널 안에서 세로로 쌓임) */
+.km-art-card{background:rgba(255,255,255,0.04);border:1px solid rgba(80,140,220,0.15);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;margin-bottom:12px;}
+.km-art-card:hover{background:rgba(255,255,255,0.09);border-color:rgba(80,140,220,0.40);transform:translateY(-2px);}
+.km-art-card-img{width:100%;height:160px;background-size:cover;background-position:center;background-color:#0d1e38;}
+.km-art-card-body{padding:14px 16px;}
+.km-art-card-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;color:rgba(180,150,255,0.85);text-transform:uppercase;margin-bottom:7px;}
+.km-art-card-title{font-size:13px;font-weight:700;color:rgba(220,235,255,0.92);line-height:1.55;letter-spacing:-0.2px;margin-bottom:7px;}
+.km-art-card-loc{font-size:11px;color:rgba(140,185,255,0.50);}
+.km-art-card-cta{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;color:rgba(170,210,255,0.7);border:1px solid rgba(80,150,255,0.25);border-radius:5px;padding:6px 14px;transition:all .2s;}
+.km-art-card:hover .km-art-card-cta{color:#fff;border-color:rgba(80,150,255,0.6);}
+/* 빈 상태 */
+.km-art-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:14px;opacity:0.4;}
+.km-art-empty-icon{font-size:36px;}
+.km-art-empty-msg{font-size:12px;color:rgba(180,210,255,0.6);text-align:center;line-height:1.6;}
+/* 모바일: 기사 패널을 데이터 패널과 합쳐서 표시 */
+@media(max-width:767px){
+  .km-article-pane{flex:none!important;width:100%!important;max-height:0;border-left:none;
+    border-top:1px solid rgba(80,140,220,0.18);
+    transition:max-height .6s cubic-bezier(.4,0,.2,1),opacity .4s .2s;}
+  .km-split.panel-open .km-article-pane{max-height:400px;opacity:1;}
 }
 </style>
 </head>
@@ -1156,6 +1192,24 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
           <button class="km-reset-btn" id="kmResetBtn" style="display:none;" onclick="resetMapZoom()">← 전체 보기</button>
         </div>
       </div>
+      <!-- ② 기사 패널 (가운데 1/3) -->
+      <div class="km-article-pane" id="kmArticlePane">
+        <div class="km-art-scroll">
+          <div class="km-art-hdr">
+            <span class="km-art-hdr-icon">📰</span>
+            <span class="km-art-hdr-txt">관련 현장 기사</span>
+          </div>
+          <div id="kmPArticles">
+            <!-- 기사 없는 지역 플레이스홀더 -->
+            <div class="km-art-empty" id="kmArtEmpty">
+              <div class="km-art-empty-icon">🗺️</div>
+              <div class="km-art-empty-msg">이 지역의 현장 기사를<br>준비 중입니다</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ③ 데이터 패널 (오른쪽 1/3) -->
       <div class="km-data-pane" id="kmDataPane">
         <div class="km-panel-scroll">
           <button class="km-panel-close" onclick="kmClosePanelFn()">✕</button>
@@ -1166,12 +1220,9 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
             <div class="km-score-big" id="kmPScore">—</div>
             <div class="km-score-max">/ 100점</div>
           </div>
-          <!-- 관련 기사 — 점수 바로 아래 바로 보이는 위치 -->
-          <div class="km-related" id="kmPRelated" style="display:none;"></div>
           <canvas class="km-panel-crystal" id="kmPanelCanvas" width="280" height="280"></canvas>
           <div class="km-pdims" id="kmPDims"></div>
         </div>
-        <!-- CTA 버튼: 스크롤 영역 밖, 항상 하단 고정 -->
         <button class="km-panel-cta" onclick="kmViewFull()">전체 데이터 보기 ↓</button>
       </div>
     </div>
@@ -1917,9 +1968,9 @@ function drawCrystalChart(d, canvasId='crystalCanvas'){
   const isDark = canvasId==='kmPanelCanvas';
   const canvas = document.getElementById(canvasId);
   // CSS 전환 완료 후 실제 렌더 크기 사용, 최소 크기 보장
-  const minFallback = isDark ? 220 : 340;
+  const minFallback = isDark ? 200 : 340;
   const rawSize = Math.max(canvas.offsetWidth || 0, minFallback);
-  const size = isDark ? Math.min(rawSize, 220) : rawSize;
+  const size = isDark ? Math.min(rawSize, 200) : rawSize;
   canvas.width = size*2; canvas.height = size*2;
   canvas.style.width = size+'px'; canvas.style.height = size+'px';
   const ctx = canvas.getContext('2d');
@@ -2964,37 +3015,38 @@ function kmOpenPanel(no){
     </div>`).join('');
   // Draw crystal chart in panel (wait for CSS transition to start)
   // Open split first, then draw chart after CSS transition completes (720ms)
-  // Inject related articles
+  // ── 기사 패널 채우기 (중간 1/3) ──
   const relArticles = KM_RELATED_ARTICLES[no] || [];
-  const relEl = document.getElementById('kmPRelated');
+  const artContainer = document.getElementById('kmPArticles');
+  const artEmpty = document.getElementById('kmArtEmpty');
   if(relArticles.length > 0){
-    relEl.style.display = 'block';
-    // ① HTML 먼저 구성 (base64 제외, 이미지 div에는 임시 ID만)
-    relEl.innerHTML = '<div class="km-related-label">📰 관련 현장 기사</div>' +
-      relArticles.map((a,i) => `<div class="km-rel-card" onclick="kmGoArticle('${a.action}','${a.id||''}')">
-          <div class="km-rel-img" id="kmRI-${i}"></div>
-          <div class="km-rel-body">
-            <div class="km-rel-badge">${a.badge}</div>
-            <div class="km-rel-title">${a.title}</div>
-            <div class="km-rel-loc">📍 ${a.loc}</div>
-          </div>
-        </div>`).join('');
-    // ② innerHTML 완성 후 background-image를 JS로 직접 주입 (대용량 base64 HTML 파서 우회)
+    // ① HTML 구성 (이미지 없이)
+    artContainer.innerHTML = relArticles.map((a,i) =>
+      `<div class="km-art-card" onclick="kmGoArticle('${a.action}','${a.id||''}')">
+        <div class="km-art-card-img" id="kmAI-${i}"></div>
+        <div class="km-art-card-body">
+          <div class="km-art-card-badge">${a.badge}</div>
+          <div class="km-art-card-title">${a.title}</div>
+          <div class="km-art-card-loc">📍 ${a.loc}</div>
+          <span class="km-art-card-cta">자세히 읽기 →</span>
+        </div>
+      </div>`
+    ).join('');
+    // ② 이미지 직접 주입 (base64 파서 우회)
     relArticles.forEach(function(a,i){
-      const srcEl = document.getElementById(a.imgSrc);
-      const dstEl = document.getElementById('kmRI-'+i);
+      const srcEl=document.getElementById(a.imgSrc);
+      const dstEl=document.getElementById('kmAI-'+i);
       if(!srcEl||!dstEl) return;
-      // style.backgroundImage 우선, 없으면 style 속성 직접 파싱
-      let bg = srcEl.style.backgroundImage;
-      if(!bg){
-        const raw = srcEl.getAttribute('style')||'';
-        const m = raw.match(/background-image:\s*(url\([^)]+\))/);
-        if(m) bg = m[1];
-      }
-      if(bg){ dstEl.style.backgroundImage=bg; dstEl.style.backgroundSize='cover'; dstEl.style.backgroundPosition='center'; }
+      let bg=srcEl.style.backgroundImage;
+      if(!bg){const raw=srcEl.getAttribute('style')||'';const m=raw.match(/background-image:\s*(url\([^)]+\))/);if(m)bg=m[1];}
+      if(bg){dstEl.style.backgroundImage=bg;dstEl.style.backgroundSize='cover';dstEl.style.backgroundPosition='center';}
     });
+    if(artEmpty) artEmpty.style.display='none';
   } else {
-    relEl.style.display = 'none';
+    // 기사 없는 지역: 카드 지우고 빈 상태 표시
+    const cards=artContainer.querySelectorAll('.km-art-card');
+    cards.forEach(c=>c.remove());
+    if(artEmpty) artEmpty.style.display='flex';
   }
   document.getElementById('kmSplit').classList.add('panel-open');
   setTimeout(()=>drawCrystalChart(d,'kmPanelCanvas'),750);
@@ -3017,6 +3069,11 @@ function kmClosePanelFn(){
     kmTgtZoom=1;kmTgtPanX=0;kmTgtPanY=0;
     document.getElementById('kmResetBtn').style.display='none';
   }
+  // 기사 패널 초기화
+  const artEmpty=document.getElementById('kmArtEmpty');
+  if(artEmpty) artEmpty.style.display='flex';
+  const cards=document.getElementById('kmPArticles');
+  if(cards){cards.querySelectorAll('.km-art-card').forEach(c=>c.remove());}
 }
 
 function kmViewFull(){

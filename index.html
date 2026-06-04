@@ -394,7 +394,7 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
   overflow:hidden;opacity:0;
   background:linear-gradient(160deg,#0d1e38 0%,#091525 100%);
   border-left:1px solid rgba(80,140,220,0.18);
-  display:flex;align-items:flex-start;
+  display:flex;flex-direction:column;align-items:stretch;
   transition:flex .72s cubic-bezier(.4,0,.2,1),opacity .45s .22s;
 }
 .km-split.panel-open .km-map-pane{flex:0 0 56%;}
@@ -430,7 +430,7 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
   .km-legend-row{padding:8px 16px 12px;gap:10px;}
   .km-legend-item{font-size:10px;}
   /* Panel scroll height */
-  .km-panel-scroll{max-height:60vh;}
+  .km-panel-scroll{max-height:none;}
   /* Hero section adjustments */
   .hero-title{font-size:clamp(28px,8vw,44px)!important;}
 
@@ -467,7 +467,7 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 .km-reset-btn{position:absolute;top:12px;left:12px;background:rgba(15,40,90,0.78);border:1px solid rgba(80,140,220,0.4);border-radius:8px;padding:7px 14px;font-size:11px;font-weight:700;color:rgba(180,215,255,0.85);cursor:pointer;backdrop-filter:blur(8px);transition:background .15s;}
 .km-reset-btn:hover{background:rgba(25,60,130,0.9);}
 /* Data panel */
-.km-panel-scroll{width:100%;padding:28px 24px 48px;overflow-y:auto;max-height:780px;}
+.km-panel-scroll{width:100%;padding:20px 20px 16px;overflow-y:auto;flex:1;min-height:0;}
 .km-panel-close{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:rgba(160,200,255,0.6);border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;float:right;line-height:1;display:flex;align-items:center;justify-content:center;transition:all .15s;}
 .km-panel-close:hover{background:rgba(255,255,255,0.14);color:#fff;}
 .km-panel-sido-tag{font-size:9px;font-weight:700;letter-spacing:3px;color:#5aa8e0;text-transform:uppercase;margin-bottom:5px;padding-top:4px;clear:both;}
@@ -486,7 +486,7 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 .km-pdim-fill.env{background:linear-gradient(90deg,#7aaa1a,#a8cc30);}
 .km-pdim-fill.eco{background:linear-gradient(90deg,#c8922a,#e8b040);}
 .km-pdim-fill.soc{background:linear-gradient(90deg,#32B9EB,#5cd8ff);}
-.km-panel-cta{width:100%;margin-top:20px;margin-bottom:8px;background:rgba(60,120,220,0.16);border:1px solid rgba(80,150,255,0.3);color:rgba(170,210,255,0.85);border-radius:8px;padding:13px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;}
+.km-panel-cta{width:100%;margin-top:0;flex-shrink:0;border-radius:0 0 0 0;border-top:1px solid rgba(80,150,255,0.2);border-left:none;border-right:none;border-bottom:none;background:rgba(60,120,220,0.16);border:1px solid rgba(80,150,255,0.3);color:rgba(170,210,255,0.85);border-radius:8px;padding:13px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit;}
 .km-panel-cta:hover{background:rgba(60,120,220,0.3);color:#fff;}
 /* ── PAYMENT MODAL ── */
 .pay-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.60);backdrop-filter:blur(5px);z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;}
@@ -1170,8 +1170,9 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
           <div class="km-related" id="kmPRelated" style="display:none;"></div>
           <canvas class="km-panel-crystal" id="kmPanelCanvas" width="280" height="280"></canvas>
           <div class="km-pdims" id="kmPDims"></div>
-          <button class="km-panel-cta" onclick="kmViewFull()">전체 데이터 보기 ↓</button>
         </div>
+        <!-- CTA 버튼: 스크롤 영역 밖, 항상 하단 고정 -->
+        <button class="km-panel-cta" onclick="kmViewFull()">전체 데이터 보기 ↓</button>
       </div>
     </div>
     <div class="km-legend-row">

@@ -666,10 +666,10 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 /* ── 패널 내 관련 기사 ── */
 .km-related{margin-top:16px;margin-bottom:20px;border:1px solid rgba(80,140,220,0.22);border-radius:12px;padding:16px;background:rgba(10,25,55,0.4);}
 .km-related-label{font-size:9px;font-weight:700;letter-spacing:2.5px;color:rgba(140,185,255,0.55);text-transform:uppercase;margin-bottom:12px;}
-.km-rel-card{background:rgba(255,255,255,0.05);border:1px solid rgba(80,140,220,0.15);border-radius:10px;overflow:hidden;cursor:pointer;transition:all .2s;margin-bottom:10px;}
+.km-rel-card{background:rgba(255,255,255,0.05);border:1px solid rgba(80,140,220,0.15);border-radius:10px;overflow:hidden;cursor:pointer;transition:all .2s;margin-bottom:10px;display:flex;align-items:stretch;}
 .km-rel-card:hover{background:rgba(255,255,255,0.10);border-color:rgba(80,140,220,0.35);transform:translateY(-1px);}
-.km-rel-img{width:100%;height:110px;background-size:cover;background-position:center;background-color:#0d1e38;}
-.km-rel-body{padding:12px 14px;}
+.km-rel-img{flex:0 0 130px;width:130px;min-height:90px;background-size:cover;background-position:center;background-color:#0d1e38;}
+.km-rel-body{padding:12px 14px;flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;}
 .km-rel-badge{font-size:8px;font-weight:700;letter-spacing:1.5px;color:rgba(180,150,255,0.8);text-transform:uppercase;margin-bottom:5px;}
 .km-rel-title{font-size:12px;font-weight:700;color:rgba(220,235,255,0.9);line-height:1.5;letter-spacing:-0.2px;}
 .km-rel-loc{font-size:10px;color:rgba(140,185,255,0.45);margin-top:5px;}
@@ -2968,19 +2968,30 @@ function kmOpenPanel(no){
   const relEl = document.getElementById('kmPRelated');
   if(relArticles.length > 0){
     relEl.style.display = 'block';
+    // ① HTML 먼저 구성 (base64 제외, 이미지 div에는 임시 ID만)
     relEl.innerHTML = '<div class="km-related-label">📰 관련 현장 기사</div>' +
-      relArticles.map(a => {
-        const src = document.getElementById(a.imgSrc);
-        const imgStyle = src ? src.style.backgroundImage : '';
-        return `<div class="km-rel-card" onclick="kmGoArticle('${a.action}','${a.id || a.href || ''}')">
-          <div class="km-rel-img" style="background-image:${imgStyle};background-size:cover;background-position:center;"></div>
+      relArticles.map((a,i) => `<div class="km-rel-card" onclick="kmGoArticle('${a.action}','${a.id||''}')">
+          <div class="km-rel-img" id="kmRI-${i}"></div>
           <div class="km-rel-body">
             <div class="km-rel-badge">${a.badge}</div>
             <div class="km-rel-title">${a.title}</div>
             <div class="km-rel-loc">📍 ${a.loc}</div>
           </div>
-        </div>`;
-      }).join('');
+        </div>`).join('');
+    // ② innerHTML 완성 후 background-image를 JS로 직접 주입 (대용량 base64 HTML 파서 우회)
+    relArticles.forEach(function(a,i){
+      const srcEl = document.getElementById(a.imgSrc);
+      const dstEl = document.getElementById('kmRI-'+i);
+      if(!srcEl||!dstEl) return;
+      // style.backgroundImage 우선, 없으면 style 속성 직접 파싱
+      let bg = srcEl.style.backgroundImage;
+      if(!bg){
+        const raw = srcEl.getAttribute('style')||'';
+        const m = raw.match(/background-image:\s*(url\([^)]+\))/);
+        if(m) bg = m[1];
+      }
+      if(bg){ dstEl.style.backgroundImage=bg; dstEl.style.backgroundSize='cover'; dstEl.style.backgroundPosition='center'; }
+    });
   } else {
     relEl.style.display = 'none';
   }

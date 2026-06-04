@@ -680,6 +680,81 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
 .km-art-btn{background:rgba(255,160,40,0.12);border:1px solid rgba(255,160,40,0.40);color:rgba(255,200,100,0.9);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;}
 .km-art-btn:hover{background:rgba(255,160,40,0.28);border-color:rgba(255,160,40,0.8);color:#fff;}
 @media(max-width:767px){.km-article-shortcuts{gap:6px;}.km-art-label{display:none;}}
+
+/* ══════════════════════════════
+   홈페이지 모바일 반응형
+══════════════════════════════ */
+@media(max-width:767px){
+
+  /* ── 히어로 슬라이더 ── */
+  .hs-wrap{height:100svh;min-height:480px;}
+  .hs-content{padding:24px 20px 72px;}
+  .hs-tag{font-size:9px;letter-spacing:2px;margin-bottom:6px;}
+  .hs-loc{font-size:11px;margin-bottom:10px;}
+  .hs-title{font-size:clamp(20px,6.5vw,30px);letter-spacing:-0.8px;line-height:1.25;margin-bottom:12px;}
+  .hs-btns{gap:8px;}
+  .hs-btn-p{padding:11px 20px;font-size:12px;}
+  .hs-btn-s{padding:10px 16px;font-size:12px;}
+  .hs-dots{bottom:16px;}
+  .hs-dot{width:6px;height:6px;}
+  .hs-dot.active{width:22px;}
+
+  /* ── 지역 사례 섹션 ── */
+  .cases-sec{padding:44px 16px 48px;}
+  .cases-hdr{flex-direction:column;align-items:flex-start;margin-bottom:24px;gap:10px;}
+  .cases-title{font-size:clamp(22px,6.5vw,30px);letter-spacing:-1px;}
+  .cases-sub{font-size:12px;margin-top:5px;}
+  .cases-more-link.top-btn{display:none;} /* 상단 버튼은 모바일에서 숨김 */
+  .case-feat{margin-bottom:14px;border-radius:12px;}
+  .case-feat-img{min-height:200px;}
+  .case-feat-body{padding:22px 18px 26px;}
+  .case-feat-badge{font-size:8px;margin-bottom:10px;}
+  .case-feat-loc{font-size:10px;margin-bottom:8px;}
+  .case-feat-title{font-size:clamp(15px,5vw,20px);line-height:1.35;margin-bottom:10px;}
+  .case-feat-cta{padding:9px 18px;font-size:11px;}
+  .cases-grid{gap:10px;margin-bottom:24px;}
+  .case-card-img{height:140px;}
+  .case-card-body{padding:12px 14px;}
+  .case-card-title{font-size:13px;line-height:1.45;}
+  .case-card-loc{font-size:10px;margin-top:5px;}
+  .cases-bottom{margin-top:4px;}
+
+  /* ── 통계 바 ── */
+  .stat-item{padding:18px 14px;}
+  .stat-num{font-size:clamp(20px,5.5vw,28px);}
+  .stat-en{font-size:8px;}
+  .stat-lbl{font-size:10px;}
+
+  /* ── About / 소개 섹션 ── */
+  .sec{padding:52px 20px;}
+  .sec-title{font-size:clamp(22px,6vw,30px);}
+  .sec-sub{font-size:13px;line-height:1.8;}
+  .dim-grid{gap:1px;margin-top:20px;}
+  .dim-card{padding:16px 14px;}
+  .dim-card h4{font-size:13px;}
+  .dim-card p{font-size:11px;}
+  .schedule-box{padding:20px 16px;margin-top:0;}
+  .schedule-box-title{font-size:14px;}
+  .sch-row{font-size:12px;padding:7px 0;}
+  .sch-row strong{font-size:12px;}
+
+  /* ── 원칙 섹션 ── */
+  .principle-card{padding:24px 20px;}
+  .principle-en{font-size:clamp(16px,5vw,22px);}
+  .principle-card p{font-size:12px;}
+
+  /* ── CTA 섹션 ── */
+  .cta-sec{padding:56px 20px;}
+  .cta-sec h2{font-size:clamp(24px,7vw,36px);}
+  .cta-sec p{font-size:13px;margin-bottom:28px;}
+  .btn-cta-p,.btn-cta-o{padding:12px 24px;font-size:12px;}
+}
+
+@media(max-width:400px){
+  .hs-title{font-size:19px;}
+  .hs-btn-s{display:none;} /* 아주 작은 화면에서 두번째 버튼 숨김 */
+  .case-feat-img{min-height:170px;}
+}
 </style>
 </head>
 <body>
@@ -828,7 +903,7 @@ footer{background:var(--g2);border-top:1px solid var(--g3);padding:36px 24px;dis
           <h2 class="cases-title">지역이 살아남는 방법</h2>
           <p class="cases-sub">전국 지자체 현장에서 회복력을 실천하는 사람들의 이야기를 소개합니다.</p>
         </div>
-        <button class="cases-more-link" onclick="showPage('research')">뉴스룸 더 보기 →</button>
+        <button class="cases-more-link top-btn" onclick="showPage('research')">뉴스룸 더 보기 →</button>
       </div>
 
       <!-- 피처드: 빵 나눔 기사 -->
@@ -1416,48 +1491,67 @@ function showPage(id){
 
 // ══ HERO SLIDER ══
 (function(){
-  let cur=0, total=4, timer=null, startX=0, isDragging=false;
+  const DELAY = 5000; // 각 슬라이드 표시 시간 (ms)
+  let cur=0, total=4, timer=null, paused=false, startX=0, isDragging=false;
   const track=document.getElementById('hsTrack');
   const dots=[...document.querySelectorAll('.hs-dot')];
   const slides=[...document.querySelectorAll('.hs-slide')];
   const curNum=document.getElementById('hsCurNum');
 
-  function bgOf(i){ return document.getElementById('hs-bg-'+(i+1)); }
-
-  function goTo(idx, force){
-    if(!force && idx===cur) return;
+  // ── 슬라이드 이동 ──
+  function goTo(idx){
+    if(idx===cur) return;
     slides[cur].classList.remove('active');
     cur=(idx+total)%total;
     track.style.transform='translateX(-'+cur*100+'%)';
     slides[cur].classList.add('active');
-    dots.forEach((d,i)=>d.classList.toggle('active',i===cur));
+    dots.forEach(function(d,i){ d.classList.toggle('active',i===cur); });
     if(curNum) curNum.textContent=cur+1;
   }
-
   function next(){ goTo(cur+1); }
   function prev(){ goTo(cur-1); }
 
-  function startAuto(){ timer=setInterval(next,5000); }
-  function stopAuto(){ clearInterval(timer); }
+  // ── setTimeout 기반 타이머 (중복 적재 불가) ──
+  function schedule(){
+    clearTimeout(timer);
+    timer=null;
+    if(!paused) timer=setTimeout(function(){ next(); schedule(); }, DELAY);
+  }
+  function pause(){
+    paused=true;
+    clearTimeout(timer);
+    timer=null;
+  }
+  function resume(){
+    paused=false;
+    schedule(); // 새로 5초 카운트 시작
+  }
 
-  // Init first slide active
+  // ── 초기화 ──
   slides[0].classList.add('active');
 
-  // Arrows
-  document.getElementById('hsPrev').addEventListener('click',function(e){e.stopPropagation();stopAuto();prev();startAuto();});
-  document.getElementById('hsNext').addEventListener('click',function(e){e.stopPropagation();stopAuto();next();startAuto();});
+  // ── 화살표 (클릭 시 즉시 이동 + 5초 리셋) ──
+  document.getElementById('hsPrev').addEventListener('click',function(e){
+    e.stopPropagation();
+    prev();
+    schedule(); // 타이머 리셋: 방금 넘긴 슬라이드부터 5초 카운트
+  });
+  document.getElementById('hsNext').addEventListener('click',function(e){
+    e.stopPropagation();
+    next();
+    schedule();
+  });
 
-  // Dots
+  // ── 도트 클릭 ──
   dots.forEach(function(d){
     d.addEventListener('click',function(e){
       e.stopPropagation();
-      stopAuto();
       goTo(parseInt(d.dataset.idx));
-      startAuto();
+      schedule();
     });
   });
 
-  // Slide click → navigate to article/link
+  // ── 슬라이드 클릭 → 기사/링크 이동 ──
   slides.forEach(function(sl){
     sl.addEventListener('click',function(){
       const action=sl.dataset.action;
@@ -1470,29 +1564,27 @@ function showPage(id){
     });
   });
 
-  // Touch swipe
-  track.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;isDragging=true;},{ passive:true });
+  // ── 터치 스와이프 ──
+  track.addEventListener('touchstart',function(e){
+    startX=e.touches[0].clientX;
+    isDragging=true;
+  },{passive:true});
   track.addEventListener('touchend',function(e){
     if(!isDragging)return;
     const dx=e.changedTouches[0].clientX-startX;
-    if(Math.abs(dx)>50){stopAuto();dx<0?next():prev();startAuto();}
+    if(Math.abs(dx)>50){ dx<0?next():prev(); schedule(); }
     isDragging=false;
   });
 
-  // Pause on hover (desktop)
+  // ── 마우스 호버 시 일시정지 (desktop) ──
   const wrap=document.getElementById('heroSlider');
-  wrap.addEventListener('mouseenter',stopAuto);
-  wrap.addEventListener('mouseleave',startAuto);
+  wrap.addEventListener('mouseenter',pause);
+  wrap.addEventListener('mouseleave',resume);
 
-  // Sync images after DOM ready
+  // ── 이미지 동기화 ──
   function syncSliderBgs(){
-    const pairs=[
-      ['nr-img-article1','hs-bg-1'],
-      ['nr-img-2','hs-bg-2'],
-      ['nr-img-3','hs-bg-3'],
-      ['nr-img-4','hs-bg-4'],
-    ];
-    pairs.forEach(function(p){
+    [['nr-img-article1','hs-bg-1'],['nr-img-2','hs-bg-2'],
+     ['nr-img-3','hs-bg-3'],['nr-img-4','hs-bg-4']].forEach(function(p){
       const src=document.getElementById(p[0]);
       const dst=document.getElementById(p[1]);
       if(src&&dst){
@@ -1503,7 +1595,7 @@ function showPage(id){
     });
   }
   syncSliderBgs();
-  startAuto();
+  schedule(); // 페이지 로드 후 5초 뒤 첫 자동 전환
 })();
 
 // ── 홈 사례 카드 이미지 동기화 ──
